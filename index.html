@@ -55,10 +55,7 @@
     <p>Select quantities and submit your order</p>
   </div>
 
-  <div class="config-banner">
-    ⚙️ <strong>One-time setup:</strong> Paste your Google Apps Script URL below
-    <input type="text" id="scriptUrl" placeholder="https://script.google.com/macros/s/YOUR_SCRIPT_URL/exec" />
-  </div>
+
 
   <div class="shop-section" style="padding-top:14px;">
     <label>Shop / Owner Name</label>
@@ -140,15 +137,11 @@
   }
 
   async function submitOrder() {
-    const scriptUrl = document.getElementById('scriptUrl').value.trim();
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxLUmp0JOLJEbxYbAVwMJ4VqVWHOo8OgCdTDp53L2aasUPyTGCBR-XLRiLXgelRXMcO/exec';
     const shop = document.getElementById('shopName').value.trim();
     const phone = document.getElementById('phone').value.trim();
     const errEl = document.getElementById('errorMsg');
     errEl.style.display = 'none';
-
-    if (!scriptUrl || !scriptUrl.includes('script.google.com')) {
-      showError('Please paste your Google Apps Script URL in the setup field above.'); return;
-    }
     if (!shop) { showError('Please enter the shop name.'); return; }
 
     let total = 0;
