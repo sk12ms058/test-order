@@ -88,10 +88,10 @@
 
 <script>
   const skus = [
-    { name: "Smith and Jones Ginger Garlic Paste", price: 5 },
-    { name: "Smith n Jones Masala Noodles", price: 5 },
-    { name: "Chings Schezwan Chutney", price: 85 },
-    { name: "Tata Salt 1Kg", price: 30 },
+    { name: "Smith and Jones Ginger Garlic Paste", price: 2031.89, mrp: 2400 },
+    { name: "Ching's Schezwan Chutney", price: 3047.84, mrp: 3600 },
+    { name: "Chings Schezwan Chutney", price: 3047.84, mrp: 3600 },
+    { name: "Tata Salt 1Kg", price: 9050.39, mrp: 20000 },
   ];
 
   const container = document.getElementById('itemsContainer');
@@ -102,7 +102,7 @@
     div.innerHTML = `
       <div class="item-top">
         <div class="item-name">${sku.name}</div>
-        <div class="item-price">₹${sku.price}</div>
+        <div class="item-price">₹${sku.price.toFixed(2)} <span style="font-weight:400; color:#888;">(MRP ₹${sku.mrp.toLocaleString('en-IN')})</span></div>
       </div>
       <div class="item-bottom">
         <div class="qty-controls">
@@ -133,7 +133,7 @@
   function updateTotal() {
     let total = 0;
     skus.forEach((sku, i) => total += getQty(i) * sku.price);
-    document.getElementById('totalAmount').textContent = '₹' + total;
+    document.getElementById('totalAmount').textContent = '₹' + total.toFixed(2);
   }
 
   function getLocation() {
@@ -159,7 +159,7 @@
     let itemLines = [];
     skus.forEach((sku, i) => {
       const q = getQty(i);
-      if (q > 0) { itemLines.push(`${sku.name} x${q} = ₹${q * sku.price}`); total += q * sku.price; }
+      if (q > 0) { itemLines.push(`${sku.name} x${q} = ₹${(q * sku.price).toFixed(2)}`); total += q * sku.price; }
     });
     if (itemLines.length === 0) { showError('Please select at least one item.'); return; }
 
