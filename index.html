@@ -169,8 +169,8 @@
         <div class="sku-meta">${p.skuCode} &nbsp;·&nbsp; UOM: ${p.uom}</div>
         <div class="sku-bottom">
           <div class="sku-price">
-            <strong>₹${p.price.toFixed(2)}</strong>
-            <span class="mrp"> (MRP ₹${p.mrp.toLocaleString('en-IN')})</span>
+            <div><span style="font-size:11px;color:#888;">Price: </span><strong>₹${p.price.toFixed(2)}</strong></div>
+            <div><span style="font-size:11px;color:#888;">MRP: </span><span style="font-size:13px;font-weight:600;color:#e65100;">₹${isNaN(p.mrp) ? 'N/A' : p.mrp.toLocaleString('en-IN')}</span></div>
             ${sub ? `<div class="sku-subtotal">Subtotal: ${sub}</div>` : ''}
           </div>
           <div class="qty-controls">
