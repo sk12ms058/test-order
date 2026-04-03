@@ -160,7 +160,7 @@
     sl.innerHTML = '';
     products.filter(p => p.brand === activeBrand).forEach(p => {
       const qty = quantities[p.skuCode] || 0;
-      const sub = qty > 0 ? '₹' + (qty * p.price).toFixed(2) : '';
+      const sub = qty > 0 ? '₹' + (qty * p.mrp).toFixed(2) : '';
       const div = document.createElement('div');
       div.className = 'sku-card' + (qty > 0 ? ' has-qty' : '');
       div.id = 'card-' + p.skuCode;
@@ -169,8 +169,7 @@
         <div class="sku-meta">${p.skuCode} &nbsp;·&nbsp; UOM: ${p.uom}</div>
         <div class="sku-bottom">
           <div class="sku-price">
-            <div><span style="font-size:11px;color:#888;">Price: </span><strong>₹${p.price.toFixed(2)}</strong></div>
-            <div><span style="font-size:11px;color:#888;">MRP: </span><span style="font-size:13px;font-weight:600;color:#e65100;">₹${isNaN(p.mrp) ? 'N/A' : p.mrp.toLocaleString('en-IN')}</span></div>
+            <div><span style="font-size:11px;color:#888;">MRP: </span><strong>₹${p.mrp.toFixed(2)}</strong></div>
             ${sub ? `<div class="sku-subtotal">Subtotal: ${sub}</div>` : ''}
           </div>
           <div class="qty-controls">
@@ -201,7 +200,7 @@
       const p = products.find(x => x.skuCode === code);
       const subEl = card.querySelector('.sku-subtotal');
       if (qty > 0) {
-        const subText = 'Subtotal: ₹' + (qty * p.price).toFixed(2);
+        const subText = 'Subtotal: ₹' + (qty * p.mrp).toFixed(2);
         if (subEl) subEl.textContent = subText;
         else {
           const priceDiv = card.querySelector('.sku-price');
@@ -219,7 +218,7 @@
     let total = 0, count = 0;
     products.forEach(p => {
       const q = quantities[p.skuCode] || 0;
-      if (q > 0) { total += q * p.price; count += q; }
+      if (q > 0) { total += q * p.mrp; count += q; }
     });
     document.getElementById('totalAmt').textContent = '₹' + total.toFixed(2);
     document.getElementById('itemsCount').textContent = count > 0 ? count + ' unit' + (count>1?'s':'') + ' selected' : '';
@@ -243,7 +242,7 @@
     const lines = []; let total = 0;
     products.forEach(p => {
       const q = quantities[p.skuCode]||0;
-      if (q > 0) { lines.push(`${p.description} x${q} = ₹${(q*p.price).toFixed(2)}`); total += q*p.price; }
+      if (q > 0) { lines.push(`${p.description} x${q} = ₹${(q*p.mrp).toFixed(2)}`); total += q*p.mrp; }
     });
     if (!lines.length) { showError('Please select at least one item.'); return; }
 
